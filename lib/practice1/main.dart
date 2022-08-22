@@ -27,7 +27,7 @@ class _AppState extends material.State<App> {
         appBar: material.AppBar(
           title: const material.Text("简易计数器"),
         ),
-        body: Home(count: count),
+        body: Home(count: count, add: addCount),
         floatingActionButton: material.FloatingActionButton(
           onPressed: addCount,
           tooltip: "增加count",
@@ -39,9 +39,11 @@ class _AppState extends material.State<App> {
 }
 
 class Home extends material.StatelessWidget {
-  const Home({material.Key? key, required this.count}) : super(key: key);
+  const Home({material.Key? key, this.count = 0, required this.add})
+      : super(key: key);
 
   final int count;
+  final void Function() add;
 
   @override
   material.Widget build(material.BuildContext context) {
@@ -59,6 +61,10 @@ class Home extends material.StatelessWidget {
               fontWeight: material.FontWeight.bold,
             ),
           ),
+          material.ElevatedButton(
+            onPressed: add,
+            child: const material.Text("add"),
+          )
         ],
       ),
     );
